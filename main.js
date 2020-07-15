@@ -16,12 +16,8 @@ function execute(command, callback) {
     });
 };
 
-// call the function
-execute('webpack --mode development', (output) => {
+execute('npm run build', (output) => {
   console.log(output);
-});
-execute('node src/index.js', (output) => {
-    console.log(output);
 });
 
 function createWindow () {
