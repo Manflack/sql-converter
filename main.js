@@ -8,6 +8,19 @@ const BrowserWindow = electron.BrowserWindow
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+const exec = require('child_process').exec;
+
+function execute(command, callback) {
+    exec(command, (error, stdout, stderr) => { 
+        callback(stdout); 
+    });
+};
+
+// call the function
+execute('npm run dev', (output) => {
+    console.log(output);
+});
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
