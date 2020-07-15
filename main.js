@@ -17,13 +17,16 @@ function execute(command, callback) {
 };
 
 // call the function
-execute('npm run dev', (output) => {
+execute('webpack --mode development', (output) => {
+  console.log(output);
+});
+execute('node src/index.js', (output) => {
     console.log(output);
 });
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 1280, height: 720})
 
   // and load the index.html of the app.
   // 'public' is the path where webpack bundles my app

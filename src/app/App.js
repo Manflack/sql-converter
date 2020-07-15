@@ -17,7 +17,7 @@ class App extends Component {
         e.preventDefault();
         console.log(this.state);
 
-        fetch('/api/converter', {
+        fetch('http://localhost:3000/api/converter', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {

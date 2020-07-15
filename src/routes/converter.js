@@ -44,8 +44,8 @@ router.post("/", async (req, res) => {
                         var key = contentSplitted[0];
                         var value = contentSplitted[1];
 
-                        insertAcumulates = insertAcumulates + xmlInsertBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key).replace("[PROPERTY VALUE]", value);
-                        rollbackAcumulates = rollbackAcumulates + xmlRollbackBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key);
+                        insertAcumulates = insertAcumulates + xmlInsertBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key).replace("[PROPERTY VALUE]", value) + "\n";
+                        rollbackAcumulates = rollbackAcumulates + xmlRollbackBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key) + "\n";
 
                         content = "";
                     }
