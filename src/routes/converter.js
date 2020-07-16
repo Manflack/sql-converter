@@ -21,6 +21,15 @@ router.post("/", async (req, res) => {
         var sqlStatementSplitted = sqlStatementFull.split("\n");
 
         for (nText = 0; nText < sqlStatementSplitted.length; nText++) {
+
+            sqlStatementSplitted[nText] = sqlStatementSplitted[nText].trim();
+
+            while ((sqlStatementSplitted[nText][0] === "-" && sqlStatementSplitted[nText][1] === "-")
+                || sqlStatementSplitted[nText] === 0
+                || sqlStatementSplitted[nText].trim().length === 0) {
+                nText++;
+            }
+
             sqlStatement = sqlStatementSplitted[nText].toLowerCase();
             sqlStatement = sqlStatement.split(" values ");
             sqlStatement = sqlStatement[1].trim();
@@ -41,8 +50,8 @@ router.post("/", async (req, res) => {
                         console.log(content);
 
                         var contentSplitted = content.split(",");
-                        var key = contentSplitted[0];
-                        var value = contentSplitted[1];
+                        var key = contentSplitted[0].trim();
+                        var value = contentSplitted[1].trim();
 
                         insertAcumulates = insertAcumulates + xmlInsertBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key).replace("[PROPERTY VALUE]", value) + "\n";
                         rollbackAcumulates = rollbackAcumulates + xmlRollbackBase.replace("[NOMBRE DEL MODULO]", legoName).replace("[PROPERTY KEY]", key) + "\n";
@@ -54,8 +63,11 @@ router.post("/", async (req, res) => {
         }
     }
     var response = new Array();
-    response[0]=insertAcumulates;
-    response[1]=rollbackAcumulates;
+    response[0] = insertAcumulates;
+    response[1] = rollbackAcumulates;
+
+    //console.log(response);
+
     res.send(response);
 });
 
