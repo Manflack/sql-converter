@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
                         getContent = false;
                         content = content.replace(/'+/g, "");
                         content = content.trim().substr(1, (content.length) - 2);
-                        console.log(content);
+                        //console.log(content);
 
                         var contentSplitted = content.split(",");
                         var key = contentSplitted[0].trim();

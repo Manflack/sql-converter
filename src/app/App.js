@@ -17,14 +17,13 @@ class App extends Component {
         e.preventDefault();
         console.log(this.state);
 
-        fetch('http://localhost:80/api/converter', {
+        fetch('/api/converter', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            mode: 'cors'
+            }
         })
             .then(res => res.json())
             .then(data => {
