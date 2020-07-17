@@ -23,7 +23,8 @@ class App extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            mode: 'cors'
         })
             .then(res => res.json())
             .then(data => {
