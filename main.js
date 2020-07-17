@@ -10,19 +10,25 @@ let mainWindow
 
 const exec = require('child_process').exec;
 
+var processes = [];
+
 function execute(command, callback) {
-    exec(command, (error, stdout, stderr) => { 
-        callback(stdout); 
-    });
+  var newProcess = exec(command, (error, stdout, stderr) => {
+    callback(stdout);
+  });
+  processes.push(newProcess);
+  newProcess.on("exit", function () {
+    processes.splice(processes.indexOf(newProcess), 1);
+  });
 };
 
 execute('npm run build', (output) => {
   console.log(output);
 });
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1280, height: 720})
+  mainWindow = new BrowserWindow({ width: 1280, height: 720 })
 
   // and load the index.html of the app.
   // 'public' is the path where webpack bundles my app
@@ -50,6 +56,12 @@ app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
+
+    processes.forEach(function (proc) {
+      proc.kill();
+      console.log(proc);
+    });
+
     app.quit()
   }
 })
