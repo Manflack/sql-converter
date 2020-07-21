@@ -30,6 +30,7 @@ router.post("/", async (req, res) => {
                 nText++;
             }
 
+            sqlStatement = sqlStatementSplitted[nText];
             sqlStatement = sqlStatement.split(" values ");
             sqlStatement = sqlStatement.split(" VALUES ");
             sqlStatement = sqlStatement[1].trim();
