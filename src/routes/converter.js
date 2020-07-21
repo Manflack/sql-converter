@@ -31,8 +31,8 @@ router.post("/", async (req, res) => {
             }
 
             sqlStatement = sqlStatementSplitted[nText];
+            sqlStatement = sqlStatement.replace("VALUES", "values");
             sqlStatement = sqlStatement.split(" values ");
-            sqlStatement = sqlStatement.split(" VALUES ");
             sqlStatement = sqlStatement[1].trim();
 
             var getContent = false;
